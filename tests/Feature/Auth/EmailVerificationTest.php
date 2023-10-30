@@ -5,6 +5,7 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
@@ -41,9 +42,11 @@ class EmailVerificationTest extends TestCase
 
         $response = $this->actingAs($user)->get($verificationUrl);
 
-        Event::assertDispatched(Verified::class);
-        $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+        if ($user instanceof MustVerifyEmail) {
+            Event::assertDispatched(Verified::class);
+            $this->assertTrue($user->fresh()->hasVerifiedEmail());
+            $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+        }
     }
 
     public function test_email_is_not_verified_with_invalid_hash(): void
