@@ -14,7 +14,7 @@ class IndexController extends Controller
         $this->authorize('index', Item::class);
 
         return view('items.index', [
-            'items'=>Item::query()->where('created_by', '=', $request->user()->id)->get(),
+            'items' => Item::query()->where('created_by', '=', $request->user()->id)->get(),
         ]);
     }
 }
