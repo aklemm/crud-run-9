@@ -1,0 +1,62 @@
+name: PHP Tests
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['8.1', '8.2']
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            composer-
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+
+      - name: Install composer dependencies
+        run: |
+          composer install --no-scripts
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          php artisan migrate --force
+
+      - name: Install yarn dependencies
+        run: npm install
+
+      - name: Compile assets
+        run: npm run build
+
+      - name: Run Test suite
+        run: php artisan test
