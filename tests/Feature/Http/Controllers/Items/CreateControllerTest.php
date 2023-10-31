@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Items;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateControllerTest extends TestCase
