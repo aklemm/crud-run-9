@@ -31,6 +31,11 @@ class ItemPolicy
         return true;
     }
 
+    public function store(User $user): bool
+    {
+        return true;
+    }
+
     /**
      * Determine whether the user can update the model.
      */
