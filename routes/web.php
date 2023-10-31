@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Items\IndexController as ItemIndexConroller;
+use App\Http\Controllers\Items\CreateController as ItemCreateController;
+use App\Http\Controllers\Items\StoreController as ItemStoreController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Item;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/items', ItemIndexConroller::class)->can('index', Item::class)->name('items.index');
+    Route::get('/items', ItemIndexConroller::class)
+        ->can('index', Item::class)->name('items.index');
+    Route::get('/items/create', ItemCreateController::class)
+        ->can('create', Item::class)->name('items.create');
+    Route::post('/items', ItemStoreController::class)
+        ->can('store', Item::class)->name('items.store');
 });
 
 require __DIR__.'/auth.php';
