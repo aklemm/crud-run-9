@@ -36,6 +36,11 @@ class ItemPolicy
         return true;
     }
 
+    public function show(User $user, Item $item): bool
+    {
+        return true;
+    }
+
     /**
      * Determine whether the user can update the model.
      */
