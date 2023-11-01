@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/items', ItemStoreController::class)
         ->can('store', Item::class)->name('items.store');
     Route::get('/items/{item}', ItemShowController::class)
-        ->can('show,item')->name('items.name');
+        ->can('show,item')->name('items.show');
 });
 
 require __DIR__.'/auth.php';
