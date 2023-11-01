@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Items\CreateController as ItemCreateController;
 use App\Http\Controllers\Items\IndexController as ItemIndexConroller;
+use App\Http\Controllers\Items\ShowController as ItemShowController;
 use App\Http\Controllers\Items\StoreController as ItemStoreController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Item;
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
         ->can('create', Item::class)->name('items.create');
     Route::post('/items', ItemStoreController::class)
         ->can('store', Item::class)->name('items.store');
+    Route::get('/items/{item}', ItemShowController::class)
+        ->can('show,item')->name('items.show');
 });
 
 require __DIR__.'/auth.php';
