@@ -31,6 +31,11 @@ class ItemPolicy
         return true;
     }
 
+    public function edit(User $user): bool
+    {
+        return true;
+    }
+
     public function store(User $user): bool
     {
         return true;
