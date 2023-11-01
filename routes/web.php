@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Items\CreateController as ItemCreateController;
+use App\Http\Controllers\Items\DeleteController as ItemDeleteController;
 use App\Http\Controllers\Items\EditController as ItemEditController;
 use App\Http\Controllers\Items\IndexController as ItemIndexConroller;
 use App\Http\Controllers\Items\ShowController as ItemShowController;
@@ -46,6 +47,9 @@ Route::middleware('auth')->group(function () {
         ->can('edit,item')->name('items.edit');
     Route::put('/items/{item}', ItemUpdateController::class)
         ->can('update,item')->name('items.update');
+    Route::delete('/items/{item}', ItemDeleteController::class)
+        ->can('delete,item')->name('items.delete');
+
 });
 
 require __DIR__.'/auth.php';

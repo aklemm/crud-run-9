@@ -11,6 +11,16 @@
         {{ $item->creator?->name }}
     </div>
 @endcan
+@can('delete', $item)
+    <div style="display:inline-block">
+        <form method="POST" action="{{ route('items.delete', ['item' => $item->id]) }}">
+            @csrf
+            @method('DELETE')
+
+            <button>Delete</button>
+        </form>
+    </div>
+@endcan
 @can('index', \App\Models\Item::class)
     <div>
         <a href="{{ route('items.index') }}">See All</a>
