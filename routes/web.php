@@ -4,6 +4,8 @@ use App\Http\Controllers\Items\CreateController as ItemCreateController;
 use App\Http\Controllers\Items\IndexController as ItemIndexConroller;
 use App\Http\Controllers\Items\ShowController as ItemShowController;
 use App\Http\Controllers\Items\StoreController as ItemStoreController;
+use App\Http\Controllers\Items\EditController as ItemEditController;
+use App\Http\Controllers\Items\UpdateController as ItemUpdateController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Item;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +42,10 @@ Route::middleware('auth')->group(function () {
         ->can('store', Item::class)->name('items.store');
     Route::get('/items/{item}', ItemShowController::class)
         ->can('show,item')->name('items.show');
+    Route::get('/items/{item}/edit', ItemEditController::class)
+        ->can('edit,item')->name('items.edit');
+    Route::put('/items/{item}', ItemUpdateController::class)
+        ->can('update,item')->name('items.update');
 });
 
 require __DIR__.'/auth.php';
