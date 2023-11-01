@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 
 class UpdateController extends Controller
 {
-    public function __invoke(Item $item, UpdateRequest $request):RedirectResponse
+    public function __invoke(Item $item, UpdateRequest $request): RedirectResponse
     {
         $this->authorize('update', $item);
 

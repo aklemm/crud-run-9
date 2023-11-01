@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Items\CreateController as ItemCreateController;
+use App\Http\Controllers\Items\EditController as ItemEditController;
 use App\Http\Controllers\Items\IndexController as ItemIndexConroller;
 use App\Http\Controllers\Items\ShowController as ItemShowController;
 use App\Http\Controllers\Items\StoreController as ItemStoreController;
-use App\Http\Controllers\Items\EditController as ItemEditController;
 use App\Http\Controllers\Items\UpdateController as ItemUpdateController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Item;
