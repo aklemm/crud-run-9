@@ -17,7 +17,7 @@ class ShowControllerTest extends TestCase
 
         $item = Item::factory()->create(['created_by' => $user->id]);
 
-        $response = $this->actingAs($user)->get(route('items.show', ['item' => $item->id]));
+        $response = $this->actingAs($user)->get(route('items.show', ['item' => $item->slug]));
 
         $response->assertStatus(200);
 
