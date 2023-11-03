@@ -24,4 +24,6 @@
             </td>
         </tr>
     @endforeach
+    {{ $items->links() }}
+    </table>
 @endcan
