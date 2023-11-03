@@ -13,7 +13,9 @@
 @endcan
 @can('delete', $item)
     <div style="display:inline-block">
-        <form method="POST" action="{{ route('items.delete', ['item' => $item->id]) }}">
+        <form method="POST" action="{{
+            route('items.delete', ['item' => $item->slug])
+                }}">
             @csrf
             @method('DELETE')
 

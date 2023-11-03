@@ -1,5 +1,5 @@
 @can('edit', $item)
-<form action="{{ route('items.update', ['item' => $item->id]) }}" method="POST">
+<form action="{{ route('items.update', ['item' => $item->slug]) }}" method="POST">
     @csrf
     @method('PUT')
     <div>
